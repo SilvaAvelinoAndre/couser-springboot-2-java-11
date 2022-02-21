@@ -28,10 +28,10 @@ public class Order implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 
-	private Integer orderStatus;
+	private Integer orderStatus; // Alterado do tipo OrderStatus para Integer, pois dentro da classe ele vai retornar um inteiro
 
-	@ManyToOne
-	@JoinColumn(name = "client_id")
+	@ManyToOne // Anotation informa o relacionamento que é de muitos pedido(Order) para um cliente
+	@JoinColumn(name = "client_id") // Alterando o nome da tabela no banco de dados.
 	private User client;
 
 	public Order() {
@@ -41,7 +41,7 @@ public class Order implements Serializable {
 		super();
 		this.id = id;
 		this.moment = moment;
-		setOrderStatus(orderStatus);
+		setOrderStatus(orderStatus); // setando o valor inteiro no construtor 
 		this.client = client;
 	}
 
@@ -62,12 +62,13 @@ public class Order implements Serializable {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return OrderStatus.valueOf(orderStatus);
+		return OrderStatus.valueOf(orderStatus); // método para chamar o valor inteiro do OrderStatus
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
 		if(orderStatus != null) {
-		this.orderStatus = orderStatus.getCodigo();
+		this.orderStatus = orderStatus.getCodigo();// metodo para setar o valor integer no OrderStatus, pois 
+		// a busca para saber o Status é por meio do seu numero interio.
 		}
 	}
 

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_user") // mudando o nome da tabela no banco de dados
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -28,8 +28,8 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "client")
+	@JsonIgnore// para não criar varias associações de cliente e pedido no banco de dados e gerar lups.
+	@OneToMany(mappedBy = "client") // Um cliente para muitos pedidos
 	private List<Order> orders = new ArrayList<>();
 	
 	
