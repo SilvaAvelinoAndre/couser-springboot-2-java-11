@@ -8,14 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.aastechnology.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	@EmbeddedId
-	private OrderItemPK id; // (ID composto) classe que identifica o pedido e os produtos, pois a classe OrderItem é uma classe intermediaria
+	private OrderItemPK id = new OrderItemPK(); // (ID composto) classe que identifica o pedido e os produtos, pois a classe OrderItem é uma classe intermediaria
 	// entre a classe Product e Order, então para poder criar chaves de identificação pedido/produto é necessario usar uma
 	//classe auxiliar no caso OrderItemPK, esta responsavel por associar pedido e produto com um id que e´a chave primaria.
 	
@@ -45,6 +47,7 @@ public class OrderItem implements Serializable {
 		id.setProduct(product);//Pega o produto passado e inseri no id da classe OrderItemPK
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
